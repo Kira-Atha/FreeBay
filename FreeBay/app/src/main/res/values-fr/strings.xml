@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FreeBay</string>
+    <string name="welcome">Bienvenue</string>
+    <string name="signin">Connexion</string>
+    <string name="signup">Inscription</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="password">Mot de passe</string>
+    <string name="exit">Quitter</string>
+    <string name="back">Retour</string>
+    <string name="incorrectAccount" translatable="false">Compte incorrect</string>
+</resources>
