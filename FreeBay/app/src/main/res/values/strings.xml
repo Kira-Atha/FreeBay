@@ -8,4 +8,6 @@
     <string name="exit">Exit</string>
     <string name="back">Back</string>
     <string name="incorrectAccount">Incorrect account</string>
+    <string name="fieldsEmpty">Empty(ies) field(s)</string>
+    <string name="nothingInDb">Be the first to create</string>
 </resources>

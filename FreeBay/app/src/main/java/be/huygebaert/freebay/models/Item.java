@@ -10,6 +10,7 @@ public class Item implements Serializable {
     private double price;
     private String description;
     private TypeItem type;
+    private static List<Item> allItems = new ArrayList <Item>();
 
     public Item(){}
     public Item(int id, String name, double price, String description, TypeItem type) {
@@ -74,14 +75,18 @@ public class Item implements Serializable {
     }
 
     public static Item getItem(int id){
-        return new Item();
+        for(Item it : Item.allItems){
+            if(it.getId() == id){
+                return it;
+            }
+        }
+        return null;
     }
 
     public static List<Item> getAllItems(){
-        List<Item> allItems = new ArrayList<Item>();
-        allItems.add(new Item(0,"pan",25.2,"Wonderful pan",TypeItem.kitchen));
-        allItems.add(new Item(1,"dvd",32.2,"Wonderful collection dvds",TypeItem.films));
-        allItems.add(new Item(2,"cd",41.2,"Wonderful music cd",TypeItem.music));
-        return allItems;
+        return Item.allItems;
+    }
+    public static void setAllItems(List<Item> allItems){
+        Item.allItems = allItems;
     }
 }

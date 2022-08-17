@@ -1,4 +1,5 @@
 package be.huygebaert.freebay.models;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class User implements Serializable {
     private String longitude;
     private String latitude;
     private List<Item> itemsTracked;
+    private static List<User> allUsers = new ArrayList<User>();
 
     public User(){}
 
@@ -91,8 +93,7 @@ public class User implements Serializable {
     }
 
     public static User getUser(int id){
-        List<User> allUsers = User.getAllUsers();
-        for(User us : allUsers){
+        for(User us : User.allUsers){
             if(us.getId() == id){
                 return us;
             }
@@ -100,20 +101,20 @@ public class User implements Serializable {
         return null;
     }
 
+    public static void setAllUsers(List<User> allUsers){
+        User.allUsers = allUsers;
+    }
+
     public static List<User> getAllUsers(){
-        List<User> allUsers = new ArrayList<User>();
-        allUsers.add(new User(1,"Kira0","012345","0","0"));
-        allUsers.add(new User(2,"Kira1","012345","0","0"));
-        allUsers.add(new User(3,"Kira2","012345","0","0"));
-
-        return allUsers;
+        return User.allUsers;
     }
-
-    public boolean create(User user){
-        return false;
-    }
-
-    public boolean update(User user) {
-        return false;
+    public User signIn(){
+        User userToReturn = null;
+        for(User user_ : User.getAllUsers()){
+            if(this.equals(user_)) {
+                userToReturn= user_;
+            }
+        }
+        return userToReturn;
     }
 }

@@ -9,4 +9,6 @@
     <string name="exit">Quitter</string>
     <string name="back">Retour</string>
     <string name="incorrectAccount" translatable="false">Compte incorrect</string>
+    <string name="fieldsEmpty">Champ(s) vide(s)</string>
+    <string name="nothingInDb">Sois le premier à créer</string>
 </resources>
