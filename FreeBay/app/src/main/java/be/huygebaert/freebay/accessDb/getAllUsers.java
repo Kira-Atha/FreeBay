@@ -18,10 +18,10 @@ import be.huygebaert.freebay.MainActivity;
 import be.huygebaert.freebay.models.User;
 
 public class getAllUsers extends config{
-    private String get_all = "get_users.php";
+
     private MainActivity main_activity;
-    public getAllUsers(String ipServer, String port, String repertory, MainActivity activity) {
-        super(ipServer, port, repertory);
+    public getAllUsers(MainActivity activity) {
+        super();
         this.main_activity = activity;
     }
 //10.0.2.2
@@ -29,7 +29,7 @@ public class getAllUsers extends config{
     @Override
     protected String doInBackground(Void... voids) {
         try {
-            URL url = new URL(this.getBasedURL() + get_all);
+            URL url = new URL(this.getBasedURL() + this.get_all_users);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(5000);

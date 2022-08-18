@@ -18,14 +18,15 @@ import be.huygebaert.freebay.accessDb.getAllUsers;
 import be.huygebaert.freebay.models.User;
 
 public class MainActivity extends AppCompatActivity {
-    View.OnClickListener listener = new View.OnClickListener() {
-        private Intent intent;
 
+    View.OnClickListener listener = new View.OnClickListener() {
 
         @Override
         public void onClick(View view){
+            Intent intent;
             switch(view.getId()){
                 case R.id.btn_signin:
+                    /*
                     long longTime1 = System.currentTimeMillis();
                     Runnable runnable = new Runnable() { //New Thread
                         @Override
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                     };
                     Handler handler = new Handler(Looper.getMainLooper());
                     handler.postDelayed(runnable, 3000);
-
+                    */
                     EditText pseudo = findViewById(R.id.et_pseudo);
                     EditText password = findViewById(R.id.et_password);
 
@@ -73,18 +74,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Le temps d'écrire le password/pseudo, ça aura le temps de charger
-        new getAllUsers("10.0.2.2","","android",MainActivity.this).execute();
+        new getAllUsers(MainActivity.this).execute();
 
         Button btn_signIn = (Button)findViewById(R.id.btn_signin);
         btn_signIn.setOnClickListener(listener);
-
         Button btn_signUp = (Button) findViewById(R.id.btn_signup);
         btn_signUp.setOnClickListener(listener);
-
         Button btn_exit = (Button) findViewById(R.id.btn_exit);
         btn_exit.setOnClickListener(listener);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Mettre à jour les utilisateurs lorsque quelqu'un vient de s'inscrire afin de pouvoir se connecter
+        new getAllUsers(MainActivity.this).execute();
+    }
     public void populate(List<User> allUsers){
         User.setAllUsers(allUsers);
     }

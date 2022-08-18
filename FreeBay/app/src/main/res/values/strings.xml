@@ -10,4 +10,11 @@
     <string name="incorrectAccount">Incorrect account</string>
     <string name="fieldsEmpty">Empty(ies) field(s)</string>
     <string name="nothingInDb">Be the first to create</string>
+    <string name="regPseudo">Pseudo must be 3 20 characters and can\'t contain special characters</string>
+    <string name="rulesPassword">Password can\'t be > 200</string>
+    <string name="rulesPasswordVerif">Passwords are not identical</string>
+    <string name="explainPermissions">This permission is required to use the GPS </string>
+    <string name="permissionDisabled">You have disabled the permission</string>
+    <string name="createdAccount">Created account</string>
+    <string name="pseudoExist">This pseudo is already in use</string>
 </resources>

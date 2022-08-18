@@ -22,18 +22,17 @@ import be.huygebaert.freebay.models.User;
 
 public class getAllItems extends config {
 
-    private String get_all = "get_items.php";
+
     private ConsultItems consult_activity;
-    public getAllItems(String ipServer, String port, String repertory, ConsultItems activity) {
-        super(ipServer, port, repertory);
+    public getAllItems(ConsultItems activity) {
+        super();
         this.consult_activity = activity;
     }
-
 
     @Override
     protected String doInBackground(Void... voids) {
         try {
-            URL url = new URL(this.getBasedURL() + get_all);
+            URL url = new URL(this.getBasedURL() + this.get_all_items);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(5000);
@@ -96,7 +95,6 @@ public class getAllItems extends config {
                 }catch(JSONException e2){
                     //ou encore pas d'item  dans la db
                     //e2.printStackTrace();
-                    System.out.print("ya  R");
                     this.consult_activity.populate_error("nothing");
                 }
             }

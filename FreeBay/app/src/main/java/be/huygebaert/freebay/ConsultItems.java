@@ -18,7 +18,7 @@ public class ConsultItems extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult_items);
 
-        new getAllItems("10.0.2.2","","android",ConsultItems.this).execute();
+        new getAllItems(ConsultItems.this).execute();
         User user = (User) this.getIntent().getSerializableExtra("user");
         System.out.println(user.getPseudo());
     }

@@ -8,7 +8,14 @@
     <string name="password">Mot de passe</string>
     <string name="exit">Quitter</string>
     <string name="back">Retour</string>
-    <string name="incorrectAccount" translatable="false">Compte incorrect</string>
+    <string name="incorrectAccount">Compte incorrect</string>
     <string name="fieldsEmpty">Champ(s) vide(s)</string>
     <string name="nothingInDb">Sois le premier à créer</string>
+    <string name="regPseudo">Le pseudo doit contenir 3 à 20 caractères et ne peut pas contenir de caractères spéciaux</string>
+    <string name="rulesPassword">Le mot de passe ne peut pas contenir plus de 200 caractères</string>
+    <string name="rulesPasswordVerif">Les mots de passe ne sont pas identiques</string>
+    <string name="explainPermissions">Cette permission est nécessaire afin d\'utiliser le GPS</string>
+    <string name="permissionDisabled">Vous avez désactivé la permission</string>
+    <string name="createdAccount">Compte créé</string>
+    <string name="pseudoExist">Ce pseudo est déjà utilisé</string>
 </resources>

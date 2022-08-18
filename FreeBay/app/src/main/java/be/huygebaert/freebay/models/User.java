@@ -117,4 +117,13 @@ public class User implements Serializable {
         }
         return userToReturn;
     }
+
+    public boolean signUp(){
+        for(User user_ : User.getAllUsers()){
+            if(this.getPseudo().equals(user_.getPseudo())){
+                return false;
+            }
+        }
+        return true;
+    }
 }
