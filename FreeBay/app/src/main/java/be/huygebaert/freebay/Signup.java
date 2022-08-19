@@ -33,6 +33,7 @@ public class Signup extends AppCompatActivity {
     private String password ="";
     private String pseudo = "";
     private Intent intent;
+
     View.OnClickListener listener = new View.OnClickListener() {
         @SuppressLint("NewApi")
         @Override
@@ -79,21 +80,57 @@ public class Signup extends AppCompatActivity {
                             askPermission();
                         }
                     } else {
-                        //System.out.println("COUCOU");
-                        //break;
                         getPosition();
                     }
                     break;
                 case R.id.btn_back:
                     intent = new Intent(Signup.this, MainActivity.class);
+                    Signup.this.finish();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     break;
                 case R.id.btn_exit:
-                    Signup.this.finish();
+                    Signup.this.finishAffinity();
                     break;
             }
         }
     };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_signup);
+
+        Button btn_back = findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(listener);
+        Button btn_exit = findViewById(R.id.btn_exit);
+        btn_exit.setOnClickListener(listener);
+        Button btn_signup = findViewById(R.id.btn_signup);
+        btn_signup.setOnClickListener(listener);
+    }
+
+    public void populate(String msg) {
+        Toast toast;
+        switch(msg){
+            case "ok":
+                toast = Toast.makeText(Signup.this, getResources().getString(R.string.createdAccount), Toast.LENGTH_LONG);
+                toast.show();
+                intent = new Intent(Signup.this, MainActivity.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                this.finish();
+                startActivity(intent);
+                break;
+            case "Field empty":
+                toast = Toast.makeText(Signup.this, getResources().getString(R.string.fieldsEmpty), Toast.LENGTH_LONG);
+                toast.show();
+                break;
+            default:
+                // Pour le dev
+                System.out.println(msg);
+                break;
+
+        }
+    }
 
     //Snackbar => permet l'utilisation d'un bouton en comparaison du toast qui ne peut en avoir
     private void explainUtilities() {
@@ -173,40 +210,6 @@ public class Signup extends AppCompatActivity {
         }else{
             Toast toast = Toast.makeText(Signup.this, getResources().getString(R.string.pseudoExist), Toast.LENGTH_LONG);
             toast.show();
-        }
-    }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-
-        Button btn_back = findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(listener);
-        Button btn_exit = findViewById(R.id.btn_exit);
-        btn_exit.setOnClickListener(listener);
-        Button btn_signup = findViewById(R.id.btn_signup);
-        btn_signup.setOnClickListener(listener);
-    }
-
-    public void populate(String msg) {
-        Toast toast;
-        switch(msg){
-            case "ok":
-                toast = Toast.makeText(Signup.this, getResources().getString(R.string.createdAccount), Toast.LENGTH_LONG);
-                toast.show();
-                intent = new Intent(Signup.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-                break;
-            case "Field empty":
-                toast = Toast.makeText(Signup.this, getResources().getString(R.string.fieldsEmpty), Toast.LENGTH_LONG);
-                toast.show();
-                break;
-            default:
-                // Pour le dev
-                System.out.println(msg);
-                break;
-
         }
     }
 }

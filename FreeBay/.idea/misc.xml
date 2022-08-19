@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Gaabr/OneDrive - HEPH-Condorcet/Gabriel/1.Ecole 2021-2022/Q2/ProjetsAout22/Android2-22/FreeBay/app/src/main/res/layout/activity_add_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gaabr/OneDrive - HEPH-Condorcet/Gabriel/1.Ecole 2021-2022/Q2/ProjetsAout22/Android2-22/FreeBay/app/src/main/res/layout/activity_consult_items.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaabr/OneDrive - HEPH-Condorcet/Gabriel/1.Ecole 2021-2022/Q2/ProjetsAout22/Android2-22/FreeBay/app/src/main/res/layout/activity_consult_my_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gaabr/OneDrive - HEPH-Condorcet/Gabriel/1.Ecole 2021-2022/Q2/ProjetsAout22/Android2-22/FreeBay/app/src/main/res/layout/activity_main.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/Gaabr/OneDrive - HEPH-Condorcet/Gabriel/1.Ecole 2021-2022/Q2/ProjetsAout22/Android2-22/FreeBay/app/src/main/res/layout/activity_signin.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Gaabr/OneDrive - HEPH-Condorcet/Gabriel/1.Ecole 2021-2022/Q2/ProjetsAout22/Android2-22/FreeBay/app/src/main/res/layout/activity_signup.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Gaabr/OneDrive - HEPH-Condorcet/Gabriel/1.Ecole 2021-2022/Q2/ProjetsAout22/Android2-22/FreeBay/app/src/main/res/layout/activity_wizard_type.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

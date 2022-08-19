@@ -26,18 +26,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent;
             switch(view.getId()){
                 case R.id.btn_signin:
-                    /*
-                    long longTime1 = System.currentTimeMillis();
-                    Runnable runnable = new Runnable() { //New Thread
-                        @Override
-                        public void run() {
-                            long longTime2 = System.currentTimeMillis();
-                            long longTimeDifference = longTime2 - longTime1;
-                        }
-                    };
-                    Handler handler = new Handler(Looper.getMainLooper());
-                    handler.postDelayed(runnable, 3000);
-                    */
                     EditText pseudo = findViewById(R.id.et_pseudo);
                     EditText password = findViewById(R.id.et_password);
 
@@ -51,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if(userToConnect != null){
                         intent = new Intent(MainActivity.this,ConsultItems.class);
-                        intent.putExtra("user",user);
+                        intent.putExtra("user",userToConnect);
                         startActivity(intent);
                     }else{
                         Toast toast = Toast.makeText(MainActivity.this,getResources().getString(R.string.incorrectAccount),Toast.LENGTH_LONG);
@@ -60,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.btn_signup:
                     intent = new Intent(MainActivity.this, Signup.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     break;
                 case R.id.btn_exit:
@@ -95,14 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void populate_error(String error) {
-        if (error.equals("nothing")) {
-            // Inutile
-            Toast toast = Toast.makeText(MainActivity.this, getResources().getString(R.string.nothingInDb), Toast.LENGTH_LONG);
-            toast.show();
-        } else {
-            // Pour le dev
-            System.out.println(error);
-        }
+        // pour le dev
+        System.out.println(error);
     }
-
 }

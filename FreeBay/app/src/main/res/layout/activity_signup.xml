@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="center"
-    android:id="@+id/layout_signup">
+    android:id="@+id/layout_signup"
+    tools:context=".Signup">
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,7 +42,8 @@
         android:id="@+id/et_password_verif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:hint="@string/hintPsw"/>
     <Button
         android:id="@+id/btn_signup"
         android:layout_width ="wrap_content"
@@ -58,4 +61,5 @@
         android:layout_width ="wrap_content"
         android:layout_height ="wrap_content"
         android:text="@string/exit"/>
+-
 </LinearLayout>

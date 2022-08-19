@@ -18,4 +18,12 @@
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="btn_text">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+    <style name="defaultFont">
+        <item name="android:textSize">8sp</item>
+        <item name="color">@color/black</item>
+    </style>
 </resources>

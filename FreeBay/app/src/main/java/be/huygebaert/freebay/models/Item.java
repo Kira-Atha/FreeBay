@@ -10,16 +10,26 @@ public class Item implements Serializable {
     private double price;
     private String description;
     private TypeItem type;
+    private User owner;
     private static List<Item> allItems = new ArrayList <Item>();
 
     public Item(){}
-    public Item(int id, String name, double price, String description, TypeItem type) {
+    public Item(int id, String name, double price, String description, TypeItem type,User user) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.type = type;
+        this.owner = user;
     }
+    /*
+    public Item(int id,String name,double price,String description,String type){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.type = TypeItem.fromString(type);
+    }*/
 
     public int getId() {
         return id;
@@ -82,7 +92,12 @@ public class Item implements Serializable {
         }
         return null;
     }
-
+    public User getOwner(){
+        return this.owner;
+    }
+    public void setOwner(User user){
+        this.owner = user;
+    }
     public static List<Item> getAllItems(){
         return Item.allItems;
     }

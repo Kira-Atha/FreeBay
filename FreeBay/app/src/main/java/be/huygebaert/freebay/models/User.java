@@ -12,6 +12,7 @@ public class User implements Serializable {
     private String longitude;
     private String latitude;
     private List<Item> itemsTracked;
+    private List<Item> itemsToSell;
     private static List<User> allUsers = new ArrayList<User>();
 
     public User(){}
@@ -28,7 +29,8 @@ public class User implements Serializable {
         this.password = password;
         this.longitude = longitude;
         this.latitude = latitude;
-        itemsTracked = new ArrayList<Item>();
+        this.itemsTracked = new ArrayList<Item>();
+        this.itemsToSell = new ArrayList<Item>();
     }
 
     public int getId() {
@@ -79,6 +81,14 @@ public class User implements Serializable {
         this.itemsTracked = itemsTracked;
     }
 
+    public List<Item> getItemsToSell() {
+        return itemsToSell;
+    }
+
+    public void setItemsToSell(List<Item> itemsToSell) {
+        this.itemsToSell = itemsToSell;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -125,5 +135,14 @@ public class User implements Serializable {
             }
         }
         return true;
+    }
+    public boolean createItem(Item item){
+        if(item != null) {
+            this.itemsToSell.add(item);
+            // Pas vraiment obligatoire : je refresh avec la tâche asynchrone
+            Item.getAllItems().add(item);
+            return true;
+        }
+        return false;
     }
 }

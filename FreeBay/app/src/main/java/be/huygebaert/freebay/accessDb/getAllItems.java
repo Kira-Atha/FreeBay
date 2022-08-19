@@ -1,5 +1,8 @@
 package be.huygebaert.freebay.accessDb;
 
+import android.app.ProgressDialog;
+import android.widget.ProgressBar;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,12 +24,13 @@ import be.huygebaert.freebay.models.TypeItem;
 import be.huygebaert.freebay.models.User;
 
 public class getAllItems extends config {
-
+    private static User user;
 
     private ConsultItems consult_activity;
-    public getAllItems(ConsultItems activity) {
+    public getAllItems(ConsultItems activity,User user) {
         super();
         this.consult_activity = activity;
+        this.user = user;
     }
 
     @Override
@@ -76,8 +80,10 @@ public class getAllItems extends config {
                 Item item;
                 while(i <jsonArray.length()){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    TypeItem type = TypeItem.fromString(jsonObject.getString("Type"));
-                    item = new Item(jsonObject.getInt("IdItem"),jsonObject.getString("Name"),jsonObject.getDouble("Price"),jsonObject.getString("Description"),type);
+                    TypeItem newType = TypeItem.INSTANCE;
+                    newType.setText(jsonObject.getString("Type"));
+                    //TypeItem type = TypeItem.fromString(jsonObject.getString("Type"));
+                    item = new Item(jsonObject.getInt("IdItem"),jsonObject.getString("Name"),jsonObject.getDouble("Price"),jsonObject.getString("Description"),newType,user);
                     allItems.add(item);
                     i++;
                 }
@@ -88,14 +94,12 @@ public class getAllItems extends config {
                     Item item;
                     JSONObject jsonObject = new JSONObject(chaineJSON);
                     TypeItem type = TypeItem.fromString(jsonObject.getString("Type"));
-                    item = new Item(jsonObject.getInt("IdItem"),jsonObject.getString("Name"),jsonObject.getDouble("Price"),jsonObject.getString("Description"),type);
+                    item = new Item(jsonObject.getInt("IdItem"),jsonObject.getString("Name"),jsonObject.getDouble("Price"),jsonObject.getString("Description"),type,user);
                     allItems.add(item);
                     this.consult_activity.populate(allItems);
                     //e.printStackTrace();
                 }catch(JSONException e2){
-                    //ou encore pas d'item  dans la db
-                    //e2.printStackTrace();
-                    this.consult_activity.populate_error("nothing");
+                    this.consult_activity.populate_error(e2.getMessage());
                 }
             }
         }

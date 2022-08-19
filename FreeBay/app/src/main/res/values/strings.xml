@@ -17,4 +17,19 @@
     <string name="permissionDisabled">You have disabled the permission</string>
     <string name="createdAccount">Created account</string>
     <string name="pseudoExist">This pseudo is already in use</string>
+    <string name="hintPsw">Rewrite your password</string>
+    <string name="logout">Log out</string>
+    <string name="myList">See my tracked items</string>
+    <string name="addItem">Sell item</string>
+    <string name="name_item">Name</string>
+    <string name="price_item">Price</string>
+    <string name="desc_item">Description</string>
+    <string name="type_item">Type</string>
+    <string name="wizard_type">No idea ?</string>
+    <string name="title_addItem">Add item</string>
+    <string name="rulesNameItem">The name of an object must be between 2 and 30 characters long, contain no spaces or special characters</string>
+    <string name="rulesPrice">The price cannot contain a letter and must be between 0 and 100000</string>
+    <string name="rulesDesc">The description of the object may not contain more than 500 characters, nor special characters</string>
+    <string name="rulesType">The type of an object must be between 2 and 30 characters long, contain no spaces or special characters</string>
+    <string name="createdItem">Your item has been put up for sale</string>
 </resources>

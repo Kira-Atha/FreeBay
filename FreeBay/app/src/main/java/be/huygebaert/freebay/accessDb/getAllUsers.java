@@ -92,7 +92,7 @@ public class getAllUsers extends config{
                 }catch(JSONException e2){
                     //ou encore pas de personne dans la db
                     //e2.printStackTrace();
-                    this.main_activity.populate_error("nothing");
+                    this.main_activity.populate_error(e2.getMessage());
                 }
             }
         }

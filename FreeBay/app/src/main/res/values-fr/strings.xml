@@ -18,4 +18,19 @@
     <string name="permissionDisabled">Vous avez désactivé la permission</string>
     <string name="createdAccount">Compte créé</string>
     <string name="pseudoExist">Ce pseudo est déjà utilisé</string>
+    <string name="hintPsw">Réécrivez votre mot de passe</string>
+    <string name="logout">Se déconnecter</string>
+    <string name="myList">Voir mes objets suivis</string>
+    <string name="addItem">Vendre un objet</string>
+    <string name="name_item">Nom</string>
+    <string name="price_item">Prix</string>
+    <string name="desc_item">Description</string>
+    <string name="type_item">Type</string>
+    <string name="wizard_type">Pas d\'idée ?</string>
+    <string name="title_addItem">Ajouter un objet</string>
+    <string name="rulesNameItem">Le nom d\'un objet doit faire 2 à 30 caractères, ne pas contenir d\'espace ni de caractère spécial</string>
+    <string name="rulesPrice">Le prix ne peut pas contenir de lettre et doit être situé entre 0 et 100000</string>
+    <string name="rulesDesc">La description de l\'objet ne peut pas contenir plus de 500 caractères, ni des caractères spéciaux</string>
+    <string name="rulesType">Le type d\'un objet doit faire 2 à 30 caractères, ne pas contenir d\'espace ni de caractère spécial</string>
+    <string name="createdItem">Votre objet a bien été mis en vente</string>
 </resources>
