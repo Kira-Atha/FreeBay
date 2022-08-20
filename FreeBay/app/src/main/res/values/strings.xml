@@ -21,10 +21,10 @@
     <string name="logout">Log out</string>
     <string name="myList">See my tracked items</string>
     <string name="addItem">Sell item</string>
-    <string name="name_item">Name</string>
-    <string name="price_item">Price</string>
-    <string name="desc_item">Description</string>
-    <string name="type_item">Type</string>
+    <string name="name_item">Name : </string>
+    <string name="price_item">Price : </string>
+    <string name="desc_item">Description : </string>
+    <string name="type_item">Type : </string>
     <string name="wizard_type">No idea ?</string>
     <string name="title_addItem">Add item</string>
     <string name="rulesNameItem">The name of an object must be between 2 and 30 characters long, contain no spaces or special characters</string>
@@ -32,4 +32,14 @@
     <string name="rulesDesc">The description of the object may not contain more than 500 characters, nor special characters</string>
     <string name="rulesType">The type of an object must be between 2 and 30 characters long, contain no spaces or special characters</string>
     <string name="createdItem">Your item has been put up for sale</string>
+    <string name="follow">Follow this item</string>
+    <string name="alreadyInList">This item is already followed</string>
+    <string name="okFollow">You are following this item</string>
+    <string name="noItems">Nothing to display</string>
+    <string name="chooseType">Choice of type</string>
+    <string name="consultItems">Consult items</string>
+    <string name="choose">Choose</string>
+    <string name="nothingSelected">Nothing selected</string>
+    <string name="distance">Distance from each other : </string>
+    <string name="seller">Seller : </string>
 </resources>

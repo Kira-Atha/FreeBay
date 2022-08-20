@@ -23,6 +23,7 @@ public class AddItem extends AppCompatActivity {
     private double price;
     private String description;
     private String type;
+    private TypeItem type_selected;
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -94,8 +95,9 @@ public class AddItem extends AppCompatActivity {
                         break;
                     }
      // Si pas revenu du wizard, créer un nouvel enum TypeItem, sinon récupérer celui qui a été choisi
-                    TypeItem newType = TypeItem.INSTANCE;
-                    newType.setText(type);
+                    TypeItem.setAllTypes();
+                    TypeItem newType = new TypeItem(type);
+                    TypeItem.addType(newType);
                     Item item = new Item(0,name,price,description,newType,user);
                     if(user.createItem(item)){
                         new createItem(user,item,AddItem.this).execute();
@@ -110,7 +112,11 @@ public class AddItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
         user = (User) this.getIntent().getSerializableExtra("user");
-
+        type_selected = (TypeItem) this.getIntent().getSerializableExtra("type");
+        if(type_selected !=null){
+            EditText et_type_item = findViewById(R.id.et_type_item);
+            et_type_item.setText(type_selected.getName());
+        }
         Button btn_exit = findViewById(R.id.btn_exit);
         btn_exit.setOnClickListener(listener);
         Button btn_logout = findViewById(R.id.btn_logout);

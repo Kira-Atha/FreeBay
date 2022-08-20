@@ -69,6 +69,8 @@ public class getAllItems extends config {
     // va récup ret
     protected void onPostExecute(String chaineJSON) {
         List<Item> allItems = new ArrayList<Item>();
+        TypeItem.setAllTypes();
+
         // le texte qui a bien été récupéré ou bien l'erreur
         if (chaineJSON.equals("malformedURL") || chaineJSON.equals("connectionFail") || chaineJSON.equals("badStatus")) {
             this.consult_activity.populate_error(chaineJSON);
@@ -80,21 +82,22 @@ public class getAllItems extends config {
                 Item item;
                 while(i <jsonArray.length()){
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    TypeItem newType = TypeItem.INSTANCE;
-                    newType.setText(jsonObject.getString("Type"));
-                    //TypeItem type = TypeItem.fromString(jsonObject.getString("Type"));
-                    item = new Item(jsonObject.getInt("IdItem"),jsonObject.getString("Name"),jsonObject.getDouble("Price"),jsonObject.getString("Description"),newType,user);
+                    TypeItem type = new TypeItem(jsonObject.getString("Type"));
+                    TypeItem.addType(type);
+                    User owner = User.getUser(jsonObject.getInt("IdUser"));
+                    item = new Item(jsonObject.getInt("IdItem"),jsonObject.getString("Name"),jsonObject.getDouble("Price"),jsonObject.getString("Description"),type,owner);
                     allItems.add(item);
                     i++;
                 }
-               // Item.setAllItems(allItems);
                 this.consult_activity.populate(allItems);
             }catch (JSONException e) {
                 try {
                     Item item;
                     JSONObject jsonObject = new JSONObject(chaineJSON);
-                    TypeItem type = TypeItem.fromString(jsonObject.getString("Type"));
-                    item = new Item(jsonObject.getInt("IdItem"),jsonObject.getString("Name"),jsonObject.getDouble("Price"),jsonObject.getString("Description"),type,user);
+                    TypeItem type = new TypeItem(jsonObject.getString("Type"));
+                    TypeItem.addType(type);
+                    User owner = User.getUser(jsonObject.getInt("IdUser"));
+                    item = new Item(jsonObject.getInt("IdItem"),jsonObject.getString("Name"),jsonObject.getDouble("Price"),jsonObject.getString("Description"),type,owner);
                     allItems.add(item);
                     this.consult_activity.populate(allItems);
                     //e.printStackTrace();

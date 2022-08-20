@@ -11,6 +11,7 @@ public class config extends AsyncTask<Void,Void,String> {
     protected String get_all_items = "get_items.php";
     protected String add_item = "create_item.php";
     protected String add_item_to_list = "add_item_to_list.php";
+    protected String get_followed_items = "get_followed_items.php";
 
     public config(){}
 

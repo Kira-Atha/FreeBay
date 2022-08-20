@@ -22,14 +22,6 @@ public class Item implements Serializable {
         this.type = type;
         this.owner = user;
     }
-    /*
-    public Item(int id,String name,double price,String description,String type){
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.description = description;
-        this.type = TypeItem.fromString(type);
-    }*/
 
     public int getId() {
         return id;

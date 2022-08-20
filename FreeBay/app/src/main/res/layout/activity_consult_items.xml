@@ -33,4 +33,9 @@
             android:text="@string/logout"
             android:theme="@style/btn_text" />
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/consultItems"
+    />
 </LinearLayout>

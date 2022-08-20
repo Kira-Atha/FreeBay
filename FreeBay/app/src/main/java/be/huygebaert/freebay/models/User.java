@@ -82,6 +82,11 @@ public class User implements Serializable {
     }
 
     public List<Item> getItemsToSell() {
+        for(Item item : Item.getAllItems()){
+            if(item.getOwner().equals(this) && !this.itemsToSell.contains(item)){
+                this.itemsToSell.add(item);
+            }
+        }
         return itemsToSell;
     }
 
@@ -141,6 +146,13 @@ public class User implements Serializable {
             this.itemsToSell.add(item);
             // Pas vraiment obligatoire : je refresh avec la tâche asynchrone
             Item.getAllItems().add(item);
+            return true;
+        }
+        return false;
+    }
+    public boolean addItemFollow(Item item){
+        if(!this.itemsTracked.contains(item)){
+            this.itemsTracked.add(item);
             return true;
         }
         return false;

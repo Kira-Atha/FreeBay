@@ -64,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Le temps d'écrire le password/pseudo, ça aura le temps de charger
         new getAllUsers(MainActivity.this).execute();
-
         Button btn_signIn = (Button)findViewById(R.id.btn_signin);
         btn_signIn.setOnClickListener(listener);
         Button btn_signUp = (Button) findViewById(R.id.btn_signup);
