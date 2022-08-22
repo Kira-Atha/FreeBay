@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     if(userToConnect != null){
                         intent = new Intent(MainActivity.this,ConsultItems.class);
                         intent.putExtra("user",userToConnect);
+                        MainActivity.this.finish();
                         startActivity(intent);
                     }else{
                         Toast toast = Toast.makeText(MainActivity.this,getResources().getString(R.string.incorrectAccount),Toast.LENGTH_LONG);
@@ -76,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         // Mettre à jour les utilisateurs lorsque quelqu'un vient de s'inscrire afin de pouvoir se connecter
+        new getAllUsers(MainActivity.this).execute();
+    }
+
+    @Override
+    protected void onRestart(){
+        super.onRestart();
         new getAllUsers(MainActivity.this).execute();
     }
     public void populate(List<User> allUsers){

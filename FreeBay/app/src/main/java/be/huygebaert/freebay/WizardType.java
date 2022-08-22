@@ -16,10 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.huygebaert.freebay.models.TypeItem;
+import be.huygebaert.freebay.models.User;
 
 public class WizardType extends AppCompatActivity {
-    String typeSelected="";
-    Intent intent;
+    private String typeSelected="";
+    private Intent intent;
+    private User user;
+    double price;
+    String name;
+    String description;
+
     View.OnClickListener listener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -37,8 +43,12 @@ public class WizardType extends AppCompatActivity {
                         TypeItem type = TypeItem.getTypeItem(typeSelected);
                         intent = new Intent(WizardType.this, AddItem.class);
                         WizardType.this.finish();
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("type", type);
+                        intent.putExtra("user",user);
+                        intent.putExtra("name",name);
+                        intent.putExtra("price",price);
+                        intent.putExtra("description",description);
                         startActivity(intent);
                         break;
 
@@ -55,6 +65,12 @@ public class WizardType extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        user = (User)getIntent().getSerializableExtra("user");
+
+        price = (double) getIntent().getSerializableExtra("price");
+        name = (String) getIntent().getSerializableExtra("name");
+        description = (String) getIntent().getSerializableExtra("description");
+
         setContentView(R.layout.activity_wizard_type);
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(listener);

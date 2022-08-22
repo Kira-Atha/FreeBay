@@ -42,4 +42,11 @@
     <string name="nothingSelected">Nothing selected</string>
     <string name="distance">Distance from each other : </string>
     <string name="seller">Seller : </string>
+    <string name="maxDistance">Max. distance</string>
+    <string name="viewAll">View all</string>
+    <string name="consultMyList">View my list of tracked items</string>
+    <string name="see_my_sales">See my sales</string>
+    <string name="consultMySales">Consult my sales</string>
+    <string name="you">You</string>
+    <string name="sort">Sort</string>
 </resources>

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import be.huygebaert.freebay.ConsultItems;
 import be.huygebaert.freebay.ConsultMyList;
 import be.huygebaert.freebay.MainActivity;
 import be.huygebaert.freebay.models.Item;
@@ -24,10 +25,15 @@ import be.huygebaert.freebay.models.User;
 
 public class getFollowedItems extends config{
     private ConsultMyList activity;
+    private ConsultItems consultItems;
     private User user;
 
     public getFollowedItems(ConsultMyList activity, User user){
         this.activity = activity;
+        this.user = user;
+    }
+    public getFollowedItems(ConsultItems activity,User user){
+        this.consultItems= activity;
         this.user = user;
     }
     @Override
@@ -72,7 +78,11 @@ public class getFollowedItems extends config{
         System.out.println("JE RECUPERE =>"+chaineJSON);
         Item item;
         if (chaineJSON.equals("malformedURL") || chaineJSON.equals("connectionFail") || chaineJSON.equals("badStatus")) {
-            this.activity.populate(chaineJSON);
+            if(activity!=null){
+                this.activity.populate(chaineJSON);
+            }else{
+                this.consultItems.populate_error(chaineJSON);
+            }
         }else {
             try {
                 JSONArray jsonArray = new JSONArray(chaineJSON);
@@ -83,14 +93,18 @@ public class getFollowedItems extends config{
                     this.user.addItemFollow(item);
                     i++;
                 }
-                this.activity.populate("ok");
+                if(this.activity != null){
+                    this.activity.populate("ok");
+                }
+
             }catch (JSONException e) {
                 try {
                     JSONObject jsonObject = new JSONObject(chaineJSON);
                     item = Item.getItem(jsonObject.getInt("IdItem"));
                     this.user.addItemFollow(item);
-                    System.out.println("UN SEUL OBJET SUIVI");
-                    this.activity.populate("ok");
+                    if(this.activity != null) {
+                        this.activity.populate("ok");
+                    }
                 }catch(JSONException e2){
                     this.activity.populate(e2.getMessage());
                 }
