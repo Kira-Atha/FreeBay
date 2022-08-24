@@ -318,7 +318,6 @@ public class ConsultItems extends AppCompatActivity {
                         item_index++;
                     }
 
-
                     Sort2DArrayBasedOnColumnNumber(itemsAndDistance,1);
                     List<Item> itemsSorted = new ArrayList<Item>();
 

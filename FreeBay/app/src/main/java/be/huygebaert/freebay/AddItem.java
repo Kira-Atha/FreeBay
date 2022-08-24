@@ -1,12 +1,21 @@
 package be.huygebaert.freebay;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -20,20 +29,16 @@ import be.huygebaert.freebay.models.User;
 public class AddItem extends AppCompatActivity {
     private User user;
     private Intent intent;
-    private String name;
     private double price;
-    private String description;
-    private String type;
+    private String description, type, name;
     private TypeItem type_selected;
-    private EditText et_name_item;
-    private EditText et_price_item;
-    private EditText et_desc_item;
-    private EditText et_type_item;
+    private EditText et_name_item, et_price_item, et_desc_item, et_type_item;
+    private ImageView imageView0, imageView1, imageView2;
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            switch(view.getId()){
+            switch (view.getId()) {
                 case R.id.btn_exit:
                     AddItem.this.finishAffinity();
                     break;
@@ -46,7 +51,7 @@ public class AddItem extends AppCompatActivity {
                 case R.id.btn_back:
                     intent = new Intent(AddItem.this, ConsultItems.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("user",user);
+                    intent.putExtra("user", user);
                     AddItem.this.finish();
                     startActivity(intent);
                     break;
@@ -60,14 +65,14 @@ public class AddItem extends AppCompatActivity {
                     description = et_desc_item.getText().toString();
                     try {
                         price = Double.parseDouble(et_price_item.getText().toString());
-                    }catch(NumberFormatException e){
-                        price =0;
+                    } catch (NumberFormatException e) {
+                        price = 0;
                     }
 
-                    intent.putExtra("user",user);
-                    intent.putExtra("name",name);
-                    intent.putExtra("price",price);
-                    intent.putExtra("description",description);
+                    intent.putExtra("user", user);
+                    intent.putExtra("name", name);
+                    intent.putExtra("price", price);
+                    intent.putExtra("description", description);
                     AddItem.this.finish();
                     startActivity(intent);
                     break;
@@ -87,24 +92,24 @@ public class AddItem extends AppCompatActivity {
                         break;
                     }
                     String errors = "";
-                    if(!name.matches("^[A-z]*$") || name.length() > 30 || name.length() < 2){
+                    if (!name.matches("^[A-z]*$") || name.length() > 30 || name.length() < 2) {
                         errors += getResources().getString(R.string.rulesNameItem);
                         errors += "\n";
                     }
-                    try{
+                    try {
                         price = Double.parseDouble(et_price_item.getText().toString());
-                        if(price<0 || price > 100000){
+                        if (price < 0 || price > 100000) {
                             errors += getResources().getString(R.string.rulesPrice);
                         }
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         errors += getResources().getString(R.string.rulesPrice);
                         errors += "\n";
                     }
-                    if(description.length() > 500 || !description.matches("^[A-z 0-9]*$")){
+                    if (description.length() > 500 || !description.matches("^[A-z 0-9]*$")) {
                         errors += getResources().getString(R.string.rulesDesc);
                         errors += "\n";
                     }
-                    if(!type.matches("^[A-z]*$") || type.length() > 30 || type.length() < 2){
+                    if (!type.matches("^[A-z]*$") || type.length() > 30 || type.length() < 2) {
                         errors += getResources().getString(R.string.rulesType);
                         errors += "\n";
                     }
@@ -113,19 +118,19 @@ public class AddItem extends AppCompatActivity {
                         toast.show();
                         break;
                     }
-     // Si pas revenu du wizard, créer un nouveau TypeItem, sinon récupérer celui qui a été choisi
-                    if(type_selected!=null){
-                        Item item = new Item(0,name,price,description,type_selected,user);
-                        if(user.createItem(item)){
-                            new createItem(user,item,AddItem.this).execute();
+                    // Si pas revenu du wizard, créer un nouveau TypeItem, sinon récupérer celui qui a été choisi
+                    if (type_selected != null) {
+                        Item item = new Item(0, name, price, description, type_selected, user);
+                        if (user.createItem(item)) {
+                            new createItem(user, item, AddItem.this).execute();
                         }
-                    }else{
+                    } else {
                         TypeItem.setAllTypes();
                         TypeItem newType = new TypeItem(type);
                         TypeItem.addType(newType);
-                        Item item = new Item(0,name,price,description,newType,user);
-                        if(user.createItem(item)){
-                            new createItem(user,item,AddItem.this).execute();
+                        Item item = new Item(0, name, price, description, newType, user);
+                        if (user.createItem(item)) {
+                            new createItem(user, item, AddItem.this).execute();
                         }
                     }
                     break;
@@ -139,24 +144,24 @@ public class AddItem extends AppCompatActivity {
         setContentView(R.layout.activity_add_item);
         user = (User) this.getIntent().getSerializableExtra("user");
         type_selected = (TypeItem) this.getIntent().getSerializableExtra("type");
-        if(type_selected !=null){
+        if (type_selected != null) {
             et_type_item = findViewById(R.id.et_type_item);
             et_type_item.setText(type_selected.getName());
         }
         name = (String) this.getIntent().getSerializableExtra("name");
-        if(name!=null){
+        if (name != null) {
             et_name_item = findViewById(R.id.et_name_item);
             et_name_item.setText(name);
         }
-        if(this.getIntent().getSerializableExtra("price") != null){
+        if (this.getIntent().getSerializableExtra("price") != null) {
             price = (Double) this.getIntent().getSerializableExtra("price");
-            if(price!=0){
+            if (price != 0) {
                 et_price_item = findViewById(R.id.et_price_item);
                 et_price_item.setText(String.valueOf(price));
             }
         }
         description = (String) this.getIntent().getSerializableExtra("description");
-        if(description!=null){
+        if (description != null) {
             et_desc_item = findViewById(R.id.et_desc_item);
             et_desc_item.setText(description);
         }
@@ -170,32 +175,68 @@ public class AddItem extends AppCompatActivity {
         btn_wizard.setOnClickListener(listener);
         Button btn_back = findViewById(R.id.btn_back);
         btn_back.setOnClickListener(listener);
+        setImagesFromGallery();
     }
 
-    protected void onPause(){
+    public void setImagesFromGallery() {
+        imageView0 = findViewById(R.id.pic0);
+        imageView1 = findViewById(R.id.pic1);
+        imageView2 = findViewById(R.id.pic2);
+        Button btn_add_picture = findViewById(R.id.btn_add_picture);
+        btn_add_picture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println(Environment.getExternalStorageState());
+                intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+                someActivityResultLauncher.launch(intent);
+
+            }
+        });
+    }
+
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        Uri selectedImage = data.getData();
+
+                        imageView0.setImageURI(selectedImage);
+
+                    }
+                }
+            });
+
+    protected void onPause() {
         super.onPause();
         type_selected = (TypeItem) this.getIntent().getSerializableExtra("type");
-        if(type_selected !=null){
+        if (type_selected != null) {
             EditText et_type_item = findViewById(R.id.et_type_item);
             et_type_item.setText(type_selected.getName());
         }
     }
-    protected void onRestart(){
+
+    protected void onRestart() {
         super.onRestart();
         type_selected = (TypeItem) this.getIntent().getSerializableExtra("type");
-        if(type_selected !=null){
+        if (type_selected != null) {
             EditText et_type_item = findViewById(R.id.et_type_item);
             et_type_item.setText(type_selected.getName());
         }
     }
+
     public void populate(String msg) {
         Toast toast;
-        switch(msg){
+        switch (msg) {
             case "ok":
                 toast = Toast.makeText(AddItem.this, getResources().getString(R.string.createdItem), Toast.LENGTH_LONG);
                 toast.show();
                 intent = new Intent(AddItem.this, ConsultItems.class);
-                intent.putExtra("user",user);
+                intent.putExtra("user", user);
                 this.finish();
                 startActivity(intent);
                 break;
