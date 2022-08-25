@@ -1,0 +1,1 @@
+INSERT INTO local.UserInfo(Pseudo,Password,Longitude,Latitude) VALUES("Kira","012345","100","100");
